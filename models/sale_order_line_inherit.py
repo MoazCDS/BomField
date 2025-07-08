@@ -6,7 +6,7 @@ class SaleOrderLineBOM(models.Model):
 
     bom_id = fields.Many2one('mrp.bom', string="BOM",
     domain="[('product_tmpl_id', '=', product_template_id), ('product_tmpl_id.route_ids', 'in', [1]),"
-           "('product_tmpl_id.route_ids', 'in', [8])]", store="True")
+           "('product_tmpl_id.route_ids', 'in', [8])]")
 
     @api.onchange('product_id', 'product_template_id')
     def _onchange_product_id(self):
