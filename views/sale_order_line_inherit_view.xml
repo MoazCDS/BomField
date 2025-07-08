@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_sale_order_form_inherit_add_bom" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.bom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="after">
+                <field name="bom_id" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
