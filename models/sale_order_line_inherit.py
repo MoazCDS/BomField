@@ -5,8 +5,8 @@ class SaleOrderLineBOM(models.Model):
 
 
     bom_id = fields.Many2one('mrp.bom', string="BOM",
-    domain="[('product_tmpl_id', '=', product_template_id), ('product_tmpl_id.route_ids', 'in', [1]),"
-           "('product_tmpl_id.route_ids', 'in', [8])]")
+    domain="[('product_tmpl_id', '=', product_template_id), ('product_tmpl_id.is_mto', '=', True),"
+           "('product_tmpl_id.is_manufacture', '=', True)]")
 
     @api.onchange('product_id', 'product_template_id')
     def _onchange_product_id(self):
@@ -14,7 +14,7 @@ class SaleOrderLineBOM(models.Model):
             if rec.product_template_id:
                 bom = self.env['mrp.bom'].search([
                     ('product_tmpl_id', '=', rec.product_template_id.id),
-                    ('product_tmpl_id.route_ids', 'in', [1]),
-                    ('product_tmpl_id.route_ids', 'in', [8]),
+                    ('product_tmpl_id.is_mto', '=', True),
+                    ('product_tmpl_id.is_manufacture', '=', True),
                 ], limit=1)
                 rec.bom_id = bom
